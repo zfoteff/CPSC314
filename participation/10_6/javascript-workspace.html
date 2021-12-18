@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        
+        div {
+            background-color: lightcyan;
+            margin: auto;
+            height: 500px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var outputDiv = document.getElementById("output");
+            alert(outputDiv.innerHTML);
+            //Anonymous function that calls itself
+            (function() {
+                console.log("Hello, Anonymous!");
+            })();
+
+            /*https://www.w3schools.com/js/js_arrow_function.asp*/
+            let arrowFunction = (base, exponent) => {
+                for (let i = 1; i < exponent; i++) {
+                    base *= base;
+                }
+                return base;
+            }
+
+            let result = arrowFunction(2, 2);
+            console.log(result);
+            outputDiv.prepend(result);
+            outputDiv.prepend(" ");
+            result = arrowFunction(2, 3);
+            console.log(result);
+            outputDiv.prepend(result);
+
+            if (true) {
+                var num1 = 9001; //it's over 9000
+                //     let num2 = 42;
+            }
+            console.log(num1); //fine because var scope is confined to the function
+            console.log(num2); //error because let scope is confined to the {}
+
+
+
+        };
+    </script>
+</head>
+
+<body>
+    <h1>JavaScript, YAY!</h1>
+    <div id="output">
+        <ol type="a">
+            <li>
+                <p>
+                    I have only a basic understanding of JavaScript. I have never been able how to properly implement JavaScript into personal projects so I have never delved very deeply into the applications of the language.
+                </p>
+            </li>
+            <li>
+                <p>
+                    I did not know about the scoping rules for Javascript. I found it interesting that var variables can be declared in method bodies and still be accessed outside of the scope. Those rules seem completely backward to just about everything I learned in the
+                    Organization of Programming Languages class and over the course of my years developing software. I am looking forward to learning more about generating and serving HTML files using JavaScript, or other frameworks like Node.js
+                </p>
+            </li>
+        </ol>
+    </div>
+</body>
+
+</html>

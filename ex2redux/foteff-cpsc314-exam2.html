@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CPSC 314 Exam 2 Resubmission</title>
+    <style>
+        fieldset {
+            padding: 5px;
+            margin: 10px;
+            justify-content: center;
+            text-align: center;
+            border: 7px double olivedrab;
+            max-width: 400px;
+        }
+        
+        form {
+            padding: 5px;
+            margin: 10px;
+        }
+        
+        legend {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        label {
+            min-width: 150px;
+        }
+        
+        p {
+            text-align: right;
+        }
+        
+        .entered {
+            background-color: #ffa07a;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var timesClicked = 0;
+
+        function clearForm() {
+            document.getElementById("response1").value = "";
+            document.getElementById("response2").value = "";
+            document.getElementById("response3").value = "";
+            timesClicked = 0;
+        }
+
+        function calculateResult() {
+            timesClicked += 1;
+            if (timesClicked % 2 == 0) {
+                $("#response3").val("" + timesClicked + ": Even!");
+            } else {
+                $("#response3").val("" + timesClicked + ": Odd!");
+            }
+        }
+
+        $(window).ready(function() {
+            $("#clear").on("click", clearForm);
+            $("#calculate").on("click", calculateResult);
+            $(".inputs").mouseenter(function() {
+                if ($(this).attr('readonly') == 'readonly') {
+                    $(this).css("background-color", "#ffa07a");
+                } else {
+                    $(this).css("background-color", "#87cefa");
+                }
+            });
+            $(".inputs").mouseleave(function() {
+                $(this).css("background-color", "#FFFFFF");
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <form action="https://barney.gonzaga.edu/~olivares/exam2/exam-submission.php" method="post">
+        <fieldset>
+            <legend>CPSC 314 Exam 2 REDO Answer Submission Form</legend>
+            <div class="input-group">
+                <p>
+                    <label for="Response 1">The Ultimate Question:</label>
+                    <input type="text" name="response1" id="response1" class="inputs">
+                </p>
+                <p>
+                    <label for="Response 2">The Answer:</label>
+                    <input type="text" name="response2" id="response2" class="inputs">
+                </p>
+                <p>
+                    <label for="Response 3">Calculation:</label>
+                    <input type="text" name="response3" id="response3" class="inputs" readonly>
+                </p>
+            </div>
+            <div id="button-group">
+                <input type="submit" id="submit" value="Submit">
+                <input type="button" id="clear" value="Clear Form">
+                <input type="button" id="calculate" value="Calculate">
+            </div>
+        </fieldset>
+    </form>
+</body>
+
+</html>

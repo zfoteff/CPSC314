@@ -1,0 +1,64 @@
+<!-- This is the Chapter 3 Demo page
+    More HTML for CPSC 314 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <title>Fake Form Demo</title>
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+        <h1>Hello, World! New web page, who is this?</h1>
+        <!-- <img src="icee.jpg"
+                alt="Shamelessly stolen from https://i.kym-cdn.com/photos/images/original/000/000/601/C6QJPRHW4QF6KFDP7XJNW24TNDI4YNF2.jpg"> -->
+
+        <form action="submission.html" method="GET">
+                <fieldset>
+                        <legend>Feedback Form</legend>
+                        <p>
+                                <label for="first">First Name:</label>
+                                <input type="text" name="first" id="first">
+                        </p>
+
+                        <p>
+                                <label for="last">Last Name:</label>
+                                <input type="text" name="last" id="last">
+                        </p>
+                        <p>
+                                <label for="check1">I see what you did there:</label>
+                                <input type="checkbox" name="check1" id="check1">
+                        </p>
+                        <p>
+                                <label for="rating">Rate this page 0-4 "stars":</label>
+                                <strong>0</strong>
+                                <input type="radio" name="rating" value="0" id="rating">
+                                <input type="radio" name="rating" value="1">
+                                <input type="radio" name="rating" value="2">
+                                <input type="radio" name="rating" value="3">
+                                <input type="radio" name="rating" value="4">
+                                <strong>4</strong>
+                        </p>
+                        <p>
+                                <label for="agree">It was funny</label>
+                                <select name="agree" id="agree">
+                                        <option value="Yes">I agree</option>
+                                        <option value="Maybe">I don't know</option>
+                                        <option value="No">I disagree</option>
+                                </select>
+                        </p>
+                        <input id="submit" type="submit" value="Submit Feedback">
+                </fieldset>
+        </form>
+        <p>
+                A) I chose the active, hover, and focus features to implement
+                B) I chose these three features because they are the most common ways I feel users interact with websites.
+                The hover an focus features all users to clearly see that the website recognizes their interactions. The active
+                feature helps show the user that their input has been registered
+                C) I chose the flexbox layout because I believe it is the most responsive option when designing a web page
+        </p> 
+</body>
+
+</html>

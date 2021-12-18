@@ -1,0 +1,8 @@
+extends layout
+block title 
+    title About | Node Store 
+block stylesheet 
+    link(rel="stylesheet", type='text/css',href="css/about-style.css")
+block content
+    div#output-container
+        iframe(src="public_docs/about.pdf", width='100%', height='100%' async) 

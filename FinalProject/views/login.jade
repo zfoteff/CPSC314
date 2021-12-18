@@ -1,0 +1,25 @@
+doctype html 
+html 
+  head 
+    title Login | Note Store 
+    link(rel='stylesheet', type='text/css',href='css/login-style.css')
+    link(rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    script(src="scripts/login_script.js")
+  body
+    div#login-window
+      h1 Note Store
+      h2 Login
+      form(action="/login" id='user-login' method="post") 
+        div#userinput-container
+          section.entry
+            label(for="uid") Username
+            input(type="text" id="uid" name="uid" required)
+          section.entry
+            label(for="password") Password
+            input(type="password" id="password" name="password" required)
+            p.error-msg.hide
+        div#button-container
+          input(type="submit" id='login' name='login' value="Login")
+      button#clear-button Clear
+      a(href="/register") Register New User

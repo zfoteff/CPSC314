@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery Workspace 10/27</title>
+    <!-- //#1 How do we use JQuery? Include the script! -->
+    <!-- Download and reference a local file -->
+    <script src="jquery-3.5.1.min.js"></script>
+    <!-- Reference a CDN (Content Delivery Network) source -->
+    <!-- Get the latest at https://code.jquery.com/ -->
+    <!--     
+    <script 
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous">
+    </script> -->
+
+    <script>
+
+        //#2
+        //we can use .ready instead of window.onload
+        $(document).ready(function () {
+            //#3 create a JQuery object by passing the JQuery function a selected DOM node
+            var $container = jQuery(document.getElementById("container"));
+            console.log($container);
+            //#4 we can use a "shorthand" version of this with $()!
+            var $containerToo = $("#container"); //the same object as #4! -- id selector
+            console.log($containerToo);
+            //#5 JQuery object has access to JQuery specific methods and selectors!
+            //we can select DOM elements (as seen in #4)
+            //NOTE: need to include the type prefix!, e.g., . or # for class or id
+            $("ol").addClass("ordered-list"); //element selector
+            $(".ordered-list").append("<li>JQuery Introduction</li>"); //class selector
+            $(".ordered-list").append($("<li>").text("Selectors"));
+
+            var $filteredContent = $("li:contains('JQuery')"); //there are other selectors, this one finds all that contain matching word
+            console.log($filteredContent);
+
+            //#6 Events -- handled similar to standard JS but more concise!
+            //let's add a button with JQuery. it's content (label) and an id!
+            $("#container").append($("<button>").text("Click me!").attr("id", "event-btn"));
+            //now let's add an event handler for when we click it
+            $("#event-btn").click(buttonClick);
+
+            //we need a callback function!
+            function buttonClick(event) {
+                console.log("This button was clicked! (HTML content JS: " + this.innerHTML + ")"); //standard JS
+                console.log("This button was clicked! (HTML content JQuery: " + $(this).html() + ")"); //JQuery object
+            };
+
+            //let's try a different event
+            //JavaScript Method
+            let headers = document.getElementsByTagName("h1");
+
+            //can't do this! h1 returns more than one element
+            // document.getElementsByTagName("h1").addEventListener("ondblclick", function () {
+            //     console.log("Double click event detected!");
+            //     $("body").append($("<h2>").text("Header added from double click!"));
+            // });
+
+            // for (const element of headers) {
+            //     element.addEventListener("dblclick", function () {
+            //         console.log("Double click event detected!");
+            //         $("body").append($("<h2>").text("Header added from double click!"));
+            //     });
+            // };
+
+            //JQuery Method
+            // $("h1").dblclick(function () {
+            //     console.log("Double click event detected!");
+            //     $("body").append($("<h2>").text("Header added from double click!"));
+            // });
+
+
+            //#7. Styles!
+            //method 1: property-value pair
+            $("div").css("border", "2px double purple");
+            //method 2: object literal
+            $("div").css({
+                padding: "10px",
+                borderRadius: "20px", //NOTE: we have to refer to border-radius in JS naming convention
+                "margin-top": "10px",
+                backgroundColor: "rgb(235,97,35)" //same for background-color
+            });
+
+            //Activity (Using JQuery):
+            //1. Center the button created in this lecture using the property-value pair CSS method 1 demonstrated during lecture.
+            //2. Apply a background color, border, padding, and margin (your choice) to the ordered list using the object literal method demonstrated during lecture
+            //3. Add an event listener to the ordered list list items so the color changes as you hover over each individual list item (color is your choice).
+
+        }); //end of ready function 
+    </script>
+
+</head>
+
+<body>
+    <div id="container">
+        <h1>9. JQuery</h1>
+        <ol>
+
+        </ol>
+    </div>
+</body>
+
+</html>

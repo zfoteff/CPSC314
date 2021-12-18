@@ -1,0 +1,32 @@
+body {
+    justify-content: center;
+}
+
+#answers {
+    border: 3px blueviolet dashed;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+}
+
+.inputs {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+.inputs label {
+    min-width: 150px;
+    margin-right: 10px;
+}
+
+#button-container {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}

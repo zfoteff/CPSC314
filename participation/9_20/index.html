@@ -1,0 +1,62 @@
+<!-- This is the Chapter 3 Demo page    
+    More HTML for CPSC 314 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <title>Fake Form Demo</title>
+        <link rel="icon" href="favicon.png">
+</head>
+
+<body>
+        <h1>Hello, World! New web page, who is this?</h1>
+        <img src="icee.jpg"
+                alt="Shamelessly stolen from https://i.kym-cdn.com/photos/images/original/000/000/601/C6QJPRHW4QF6KFDP7XJNW24TNDI4YNF2.jpg">
+
+        <form action="submission.html" method="GET">
+                <p>
+                        <label for="first">First Name:</label>
+                        <input type="text" name="first" id="first">
+                </p>
+                <p>
+                        <label for="last">Last Name:</label>
+                        <input type="text" name="last" id="last">
+                </p>
+                <p>
+                        <label for="">Icee Master Password (free slurpees + no penalty for guessing)</label>
+                        <input type="password" name="icee-master-pass" id="icee-master-pass">
+                </p>
+                <p>
+                        Flavors: 
+                        <label for="flavor">Cherry</label>
+                        <input class="flavor" type="checkbox" id="flavor" name="cherry" value="Cherry" checked> 
+                        <label for="flavor">| Banana</label>
+                        <input class="flavor" type="checkbox" id="flavor" name="banana" value="Banana">
+                        <label for="flavor">| Blue Raspberry</label>
+                        <input class="flavor" type="checkbox" id="flavor" name="blue-razz" value="Blue Raspberry">
+                        <label for="flavor">| Coke&trade;</label>
+                        <input class="flavor" type="checkbox" id="flavor" name="coke" value="Coke">
+                        <label for="flavor">| Mt. Dew Baja Blast&trade;</label>
+                        <input class="flavor" type="checkbox" id="flavor" name="baja" value="Baja Blast">
+                </p>
+                <p>
+                        Size:
+                        <label for="size">Small</label>
+                        <input type="radio" name="size" id="small", value="Small" checked>
+                        <label for="size">| Medium</label>
+                        <input type="radio" name="size" id="med", value="Medium">                        
+                        <label for="size">| Large</label>
+                        <input type="radio" name="size" id="large", value="Large">                        
+                        <label for="size">| Xtra-Large</label>
+                        <input type="radio" name="size" id="x-large", value="Xtra-Large">
+                </p>
+                <p>
+                        <label for="size-slider">How full should cup be: </label>
+                        <input type="range" name="size-slider" id="size-slider" min=0 max=100 step=10>
+                </p>
+                <input type="submit" value="Submit Feedback">
+        </form>
+</body>
+
+</html>

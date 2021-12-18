@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPSC 314 Final Project Video</title>
+    <style>
+        .container {
+            text-align: center;
+            font-size: large;
+        }
+        
+        .requirements-list {
+            font-size: large;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>CPSC 314 Final Project Presentation</h1>
+        <h2>NoteStore</h2>
+        <h1>Zac Foteff</h2>
+            <h3 id="date">
+                <script>
+                    document.getElementById("date").innerHTML = new Date().toDateString();
+                </script>
+            </h3>
+            <p>
+                Notetaking applications are rigid in their design by limiting users to only creating text or basic lists in their documents. I have created a web app that allows users to not only create notes, but also create sections of notes that can act as a repository
+                of encrypted documents. Users will be able to create separate accounts with their own segregated notes and documents. Users will be able to login to their account, create new notes, and upload/download files in their repositories. Each
+                user’s documents will be encrypted with their own private key so only they will be able to access their own documents
+            </p>
+            <p>
+                Working username: user1 Working password: 123
+            </p>
+    </div>
+    <div class="requirements-list">
+        <h1>Functional Requirements:</h1>
+        <ol>
+            <li>
+                <p>Users must be able to sign in / create new user</p>
+            </li>
+            <li>
+                <p>User must be able signout and switch accounts from any screen</p>
+            </li>
+            <li>
+                <p>Users must be able to view all documents and sections associated with their account</p>
+            </li>
+            <li>
+                <p>Users must be able to toggle between read and write modes for notes page</p>
+            </li>
+            <li>
+                <p>User must be able to share document's from the webpage using email</p>
+            </li>
+            <li>
+                <p>User documents must be retrieved on sign in</p>
+            </li>
+            <li>
+                <p>User must be able to retrieve documents linked to their account</p>
+            </li>
+            <li>
+                <p>User's must be able to upload encrypted documents into the database</p>
+            </li>
+            <li>
+                <p>User documents must be decrypted before being served to used</p>
+            </li>
+            <li>
+                <p>User must be able to make changes to their account through the settings page</p>
+            </li>
+        </ol>
+    </div>
+</body>
+
+</html>

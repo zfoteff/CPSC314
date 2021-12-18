@@ -1,0 +1,13 @@
+#submit:hover {
+    outline-style: auto;
+    outline-width: 10px;
+    outline-color: aqua;
+}
+
+input:focus {
+    outline-color: aqua;
+}
+
+#submit:active {
+    background-color: green;
+}

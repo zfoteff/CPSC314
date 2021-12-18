@@ -1,0 +1,82 @@
+<!-- Nodejs user authentication example -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Submission Page</title>
+    <link rel="icon" href="favicon.png">
+
+    <style>
+        table,
+        th {
+            border: 1px solid black;
+            margin: auto;
+        }
+
+        td {
+            border: 1px dotted black;
+        }
+
+        .navigation,
+        h1 {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .container {
+            margin: auto;
+            width: 75%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Feedback Submission Success!</h1>
+    <div class="container">
+        <table>
+            <caption>Your Feedback has been added to the database! Here are all submissions:</caption>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Saw What I did</th>
+                <th>Rating</th>
+                <th>It was Funny</th>
+            </tr>
+            <% surveyRespondents.forEach(function(response) { %>
+            <tr>
+                <td class="fname">
+                    <%= response.first %>
+                </td>
+                <td class="lname">
+                    <%= response.last %>
+                </td>
+                <td class="check1">
+                    <%= response.check1 %>
+                </td>
+                <td class="rating">
+                    <%= response.rating %>
+                </td>
+                <td class="agree">
+                    <%= response.agree %>
+                </td>
+                <td>
+                    <!-- Added for our UPDATE and DELETE parts of CRUD -->
+                    <a href="/edit/<%= response._id %>">Edit</a> |
+                    <a href="/delete/<%= response._id %>">Delete</a>
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+    </div>
+    <div class="navigation">
+        <button><a href="/static/index.html">Presentation</a></button>
+        <button><a href="/">Login</a></button>
+        <button><a href="/survey">Form Submission</a></button>
+        <button><a href="/register">Register</a></button>
+        <button><a href="/logout">Log Out</a></button>
+    </div>
+</body>
+
+</html>

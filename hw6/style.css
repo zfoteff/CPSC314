@@ -1,0 +1,17 @@
+body {
+    justify-content: center;
+    text-align: center;
+    background-color: grey;
+}
+
+.timer-background {
+    background-color: #2f4f4f;
+}
+
+.timer-started {
+    background-color: green;
+}
+
+.timer-stopped {
+    background-color: crimson;
+}

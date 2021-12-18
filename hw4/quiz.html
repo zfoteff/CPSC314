@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Add an event listener for the DOMContentLoaded event
+        window.addEventListener("DOMContentLoaded", domLoaded);
+
+        function domLoaded() {
+            let removeCorrectCards = false
+            let includeTimer = false
+            let shuffleCards = false
+            let correctlyAnsweredQuestions = []
+            const responses = [{
+                response: "This player also won the heisman"
+            }, {
+                response: "_________ is going to score! The Ducks defeat the Huskies to move on to the Rosebowl!"
+            }, {
+                response: "This coach only stayed until he was offered his \'dream job\' at FSU"
+            }, {
+                response: "This player played in the NFL and also worked as a broadcast analyst for a time"
+            }, {
+                response: "Should have won the heisman multiple times"
+            }, {
+                response: "Not in-state"
+            }, {
+                response: "Nerds"
+            }, {
+                response: "One was bad from the beginning, one degraded over time"
+            }, {
+                response: "This player hails from Chandler, AZ"
+            }, {
+                response: "Between the school's founding in 1876 and the turn of the century"
+            }]
+
+            const questions = [{
+                question: 'Who was the Oregon Ducks\' quarterback during their appearance in the inaugural college football playoff?',
+                answers: [{
+                    text: 'Justin Herbert',
+                    correct: false
+                }, {
+                    text: 'Marcus Mariota',
+                    correct: true
+                }, {
+                    text: 'Dakota Prukop',
+                    correct: false
+                }, {
+                    text: 'Vernon Adams',
+                    correct: false
+                }]
+            }, {
+                question: 'Which Oregon Duck player is best know for the "The Pick"?',
+                answers: [{
+                    text: 'Tony Romo',
+                    correct: false
+                }, {
+                    text: 'Lavasier Tuinei',
+                    correct: false
+                }, {
+                    text: 'Ifo Ekpre-Olimu',
+                    correct: false
+                }, {
+                    text: 'Kenny Wheaton',
+                    correct: true
+                }]
+            }, {
+                question: 'Complete the coaching chronology: Chip Kelley, Mark Helfrich, ___________, Mario Cristobal?',
+                answers: [{
+                    text: 'Mike Belloti',
+                    correct: false
+                }, {
+                    text: 'Willie Taggert',
+                    correct: true
+                }]
+            }, {
+                question: 'Which Oregon quarterback graced the cover of NCAA Football 2001?',
+                answers: [{
+                    text: 'Joey Harrington',
+                    correct: true
+                }, {
+                    text: 'Darron Thomas',
+                    correct: false
+                }, {
+                    text: 'Jerimiah Massoli',
+                    correct: false
+                }, {
+                    text: 'Dennis Dixon',
+                    correct: false
+                }]
+            }, {
+                question: 'Oregon\'s leading all-time rusher is who?',
+                answers: [{
+                    text: 'De\'Anthony Thomas',
+                    correct: false
+                }, {
+                    text: 'Kenjon Barner',
+                    correct: false
+                }, {
+                    text: 'LaMichael James',
+                    correct: true
+                }, {
+                    text: 'Royce Freeman',
+                    correct: false
+                }]
+            }, {
+                question: 'Which team is Oregon\'s official rival?',
+                answers: [{
+                    text: 'Oregon State University',
+                    correct: false
+                }, {
+                    text: 'University of Washington',
+                    correct: true
+                }]
+            }, {
+                question: 'Which team has beaten Oregon the last 3 occasions that their game has into overtime?',
+                answers: [{
+                    text: 'Univerity of California at Berkley',
+                    correct: false
+                }, {
+                    text: 'University of Stanford',
+                    correct: true
+                }, {
+                    text: 'University of Colorado',
+                    correct: false
+                }, {
+                    text: 'University of Southern California',
+                    correct: false
+                }]
+            }, {
+                question: 'Select the pair of quarterbacks that were benched before the end of a full season at Oregon:',
+                answers: [{
+                    text: 'Mariota/Herbert',
+                    correct: false
+                }, {
+                    text: 'Adams/Herbert',
+                    correct: false
+                }, {
+                    text: 'Adams/Shough',
+                    correct: false
+                }, {
+                    text: 'Shough/Prukop',
+                    correct: true
+                }]
+            }, {
+                question: 'In which year did Oregon aquire their first 5-star quarterback?',
+                answers: [{
+                    text: '2010',
+                    correct: false
+                }, {
+                    text: '2021',
+                    correct: true
+                }, {
+                    text: '2020',
+                    correct: false
+                }, {
+                    text: '2005',
+                    correct: false
+                }]
+            }, {
+                question: 'In which year did Oregon field their first football team?',
+                answers: [{
+                    text: '1890',
+                    correct: false
+                }, {
+                    text: '1876',
+                    correct: false
+                }, {
+                    text: '1901',
+                    correct: false
+                }, {
+                    text: '1894',
+                    correct: true
+                }]
+            }]
+
+            const startButton = document.getElementById('start-btn')
+            const nextButton = document.getElementById('next-btn')
+            const backButton = document.getElementById('back-btn')
+            const resetButton = document.getElementById('reset-btn')
+            const restartButton = document.getElementById('restart-btn')
+            const shuffleCheck = document.getElementById('shuffle-cards')
+            const removeCorrectCheck = document.getElementById('remove-correct')
+            const timerCheck = document.getElementById('timed')
+            const timerSlider = document.getElementById('time-range')
+            const timerElement = document.getElementById('timer')
+            const timerElements = document.getElementById('timer-info')
+            const questionContainerElement = document.getElementById('question-container')
+            const questionElement = document.getElementById('question')
+            const answerButtonsElement = document.getElementById('answer-buttons')
+            const optionsContainer = document.getElementById('start-options')
+
+            let currentQuestionIndex, gameTimer
+            let workingQuestions = [].concat(questions)
+            let workingResponses = [].concat(responses)
+                //using the domLoaded function because the buttons need to be rendered before we can
+                //add an event listener
+
+            //  Event listeners
+            startButton.addEventListener('click', startGame)
+
+            nextButton.addEventListener('click', () => {
+                currentQuestionIndex++
+                setNextQuestion()
+                optionsContainer.classList.add('hide')
+            })
+
+            backButton.addEventListener('click', () => {
+                //  Clear any residual background color
+                clearStatusClass(document.body)
+                currentQuestionIndex--;
+                if (currentQuestionIndex < 0) {
+                    currentQuestionIndex = 0;
+                    setNextQuestion()
+                } else if (currentQuestionIndex == workingQuestions.length - 1) {
+                    startButton.classList.add('hide')
+                    setNextQuestion()
+                } else {
+                    setNextQuestion()
+                }
+            })
+
+            resetButton.addEventListener('click', () => {
+                //  Hide Controls
+                currentQuestionIndex = 0
+                resetButton.classList.add('hide')
+                questionContainerElement.classList.remove('hide')
+                backButton.classList.remove('hide')
+                setNextQuestion()
+            })
+
+            restartButton.addEventListener('click', () => {
+                resetState()
+                clearInterval(gameTimer)
+                workingQuestions = [].concat(questions)
+                workingResponses = [].concat(responses)
+                timerElement.textContent = "06:00"
+                timerElement.classList.add('hide')
+                timerElements.classList.add('hide')
+                questionContainerElement.classList.add('hide')
+                optionsContainer.classList.remove('hide')
+                startButton.classList.remove('hide')
+                timerCheck.checked = false
+                shuffleCheck.checked = false
+                removeCorrectCheck.checked = false
+                var removeCorrectCards = false
+                var includeTimer = false
+            })
+
+            shuffleCheck.addEventListener('click', () => {
+                if (shuffleCheck.checked == true) {
+                    shuffleCards = true
+                } else {
+                    shuffleCards = false
+                }
+            })
+
+            removeCorrectCheck.addEventListener('click', () => {
+                if (removeCorrectCheck.checked == true) {
+                    removeCorrectCards = true
+                } else {
+                    removeCorrectCards = false
+                }
+            })
+
+            timerCheck.addEventListener('click', () => {
+                if (timerCheck.checked == true) {
+                    includeTimer = true
+                    timerElement.classList.remove('hide')
+                    timerElements.classList.remove('hide')
+                } else {
+                    includeTimer = false
+                    timerElement.classList.add('hide')
+                    timerElements.classList.add('hide')
+                }
+            });
+
+            timerSlider.addEventListener('click', () => {
+                let sliderValue = timerSlider.value
+                timerElement.innerText = ("00" + sliderValue).slice(-2) + ":00"
+            })
+
+            function startGame() {
+                //  Hide controls, show the question container and back button
+                optionsContainer.classList.add('hide')
+                startButton.classList.add('hide')
+
+                //  If the cards should be shuffled
+                if (shuffleCards == true) {
+                    var random = Math.random()
+                    workingQuestions = [].concat(questions.sort(() => random - 0.5))
+                    workingResponses = [].concat(responses.sort(() => random - 0.5))
+                }
+
+                currentQuestionIndex = 0
+                questionContainerElement.classList.remove('hide')
+                showQuestion(workingQuestions[currentQuestionIndex])
+
+                //  If timer should be included
+                if (includeTimer) {
+                    var minutes = timerSlider.value
+                    var seconds = 0
+                        //  Create timer
+                    gameTimer = setInterval(function() {
+                        seconds--;
+                        if (seconds < 0) {
+                            minutes--
+                            seconds = 59
+                        }
+
+                        //  Set timer text content
+                        timerElement.textContent = ("00" + minutes).slice(-2) + ":" + ("00" + seconds).slice(-2)
+                        if (seconds == 30 || seconds == 32 || seconds == 0 || seconds == 2) {
+                            //  flash red every half minute 
+                            timerElement.style.backgroundColor = 'red'
+                            timerElement.style.color = 'white'
+                        } else {
+                            timerElement.style.backgroundColor = 'whitesmoke'
+                            timerElement.style.color = 'grey'
+                        }
+
+                        //  If timer is finished, show reset state
+                        if (minutes == 0 && seconds == 0) {
+                            endState()
+                        }
+                    }, 1000)
+                }
+            }
+
+            function setNextQuestion() {
+                resetState()
+                showQuestion(workingQuestions[currentQuestionIndex])
+            }
+
+            function clearResponseContainer() {
+                const responseContainerElement = document.getElementById('response-container')
+                if (responseContainerElement.childNodes.length > 0)
+                    responseContainerElement.removeChild(responseContainerElement.firstChild)
+                document.body.removeChild(responseContainerElement)
+            }
+
+            function showQuestion(question) {
+                questionElement.innerText = question.question
+                question.answers.forEach(answer => {
+                    const button = document.createElement('button')
+                    button.innerText = answer.text
+                    button.classList.add('btn')
+                    if (answer.correct) {
+                        button.dataset.correct = answer.correct
+                    }
+                    button.addEventListener('click', selectAnswer)
+                    answerButtonsElement.appendChild(button)
+                })
+            }
+
+            function endState() {
+                nextButton.classList.add('hide')
+                resetButton.classList.remove('hide')
+                restartButton.classList.remove('hide')
+                clearInterval(gameTimer)
+            }
+
+            function resetState() {
+                clearStatusClass(document.body)
+                nextButton.classList.add('hide')
+                backButton.classList.add('hide')
+                resetButton.classList.add('hide')
+                restartButton.classList.add('hide')
+                    //  Hide response element and clear its contents
+                clearResponseContainer()
+                while (answerButtonsElement.firstChild) {
+                    answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+                }
+            }
+
+            function selectAnswer(e) {
+                const selectedButton = e.target
+                const correct = selectedButton.dataset.correct
+                setStatusClass(document.body, correct)
+                Array.from(answerButtonsElement.children).forEach(button => {
+                    setStatusClass(button, button.dataset.correct)
+                })
+
+                if (correct == 'true' && removeCorrectCards == true) {
+                    if (workingQuestions.length == 1) {
+                        console.log("Will be empty")
+                    } else if (currentQuestionIndex == workingQuestions.length - 1 && workingQuestions.length > 2) {
+                        workingQuestions.splice(currentQuestionIndex, 1)
+                        currentQuestionIndex -= 2
+                    } else {
+                        workingQuestions.splice(currentQuestionIndex, 1)
+                        currentQuestionIndex -= 1
+                    }
+                }
+
+                //  Create response window
+                if (document.getElementById('response-container') == undefined) {
+                    const responseContainerElement = document.createElement('div')
+                    responseContainerElement.id = 'response-container'
+                    const answerInfo = document.createElement('p');
+                    answerInfo.id = "response-text";
+                    answerInfo.innerText = responses[currentQuestionIndex].response;
+                    responseContainerElement.appendChild(answerInfo);
+                    document.body.prepend(responseContainerElement)
+                }
+
+                if (workingQuestions.length > currentQuestionIndex + 1) {
+                    nextButton.classList.remove('hide')
+                    backButton.classList.remove('hide')
+                    resetButton.classList.add('hide')
+                    restartButton.classList.add('hide')
+                } else {
+                    endState()
+                }
+            }
+
+            function setStatusClass(element, correct) {
+                clearStatusClass(element)
+                if (correct) {
+                    element.classList.add('correct')
+                } else {
+                    element.classList.add('wrong')
+                }
+            }
+
+            function clearStatusClass(element) {
+                element.classList.remove('correct')
+                element.classList.remove('wrong')
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id='question-content-container'>
+        <div id="question-container" class="hide">
+            <div id="question">Question</div>
+            <div id="answer-buttons" class="btn-grid"></div>
+        </div>
+        <div class="controls">
+            <fieldset id="start-options">
+                <legend>Options</legend>
+                <label for="shuffle-cards">Shuffle Cards: </label>
+                <input type="checkbox" name="shuffle-cards" id="shuffle-cards">
+                <label for="timed">Timed Session: </label>
+                <input type="checkbox" name="timed" id="timed"><br>
+                <label for="remove-correct">Remove correct cards from deck: </label>
+                <input type="checkbox" name="remove-correct" id="remove-correct"><br>
+                <div id="timer-info" class='hide'>
+                    <hr>
+                    <label for="time-range">Timer duration: </label>
+                    <input type="range" name="time-range" id="time-range" min=1 max=10 step=1>
+                </div>
+            </fieldset>
+            <div id='timer' class='hide'>06:00</div>
+            <div class='navigation'>
+                <button id="start-btn" class="start-btn btn">Start</button>
+                <button id="reset-btn" class="reset-btn btn hide">Reset</button>
+                <button id="back-btn" class="back-btn btn hide">Back</button>
+                <button id="next-btn" class="next-btn btn hide">Next</button>
+                <button id="restart-btn" class="restart-btn btn hide">Restart</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

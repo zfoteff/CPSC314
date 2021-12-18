@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        div {
+            background-color: lightcyan;
+            margin: auto;
+            height: 500px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var outputDiv = document.getElementById("output");
+            var myInt = 42;
+            var myString = "Hello, World!";
+            const MY_CONST_VALUE = 13;
+
+            var myDouble;
+            alert("This is an annoying alert!");
+
+            var response = prompt("Do you want to play a game?");
+
+            response = 2 + 20;
+
+            console.log(response);
+
+            //conditionals
+            response > 4 ? console.log("Greater than 4!") : console.log("Less than 4!");
+
+            function printTwoThingsToTheConsole(message, someNumber) {
+                console.log("The message is: " + message + " and the number is: " + someNumber);
+                return 42;
+            }
+
+            printTwoThingsToTheConsole(456456, "hello");
+
+            // Anonymous function that calls itself
+            (function () {
+                console.log("Hello, Anonymous!");
+            })();
+
+            /*https://www.w3schools.com/js/js_arrow_function.asp*/
+
+            let arrowAdd2 = (x, y, z) => x + 2;
+
+            arrowAdd2(40, 1, 2);
+
+            let arrowFunction = (base, exponent) => {
+                for (let i = 1; i < exponent; i++) {
+                    base *= base;
+                }
+                return base;
+            }
+
+            let result = arrowFunction(2, 2);
+            console.log(result);
+            outputDiv.append(result);
+            outputDiv.append(" ");
+            result = arrowFunction(2, 3);
+            console.log(result);
+            outputDiv.append(result);
+
+            if (true) {
+                var num1 = 9001; //it's over 9000
+                let num2 = 42;
+            }
+            console.log(num1); //fine because var scope is confined to the function
+            // console.log(num2); //error because let scope is confined to the {}
+
+            var myArray = [1, 2, 3, 4];
+
+            myArray.splice(1, 2);
+
+            myArray.splice(2, 0, "hello", 9, 10);
+
+            for (let index = 0; index < myArray.length; index++) {
+                console.log("for: " + myArray[index]);
+            }
+
+            for (let myVal of myArray) {
+                console.log("for-of: " + myVal);
+                myVal += 1;
+                console.log("for-of after: " + myVal);
+            }
+            
+            myArray.forEach(function (item, i) {
+                console.log(item + " " + i);
+            });
+
+            /*
+                sorting: https://medium.com/coding-at-dawn/how-to-sort-an-array-numerically-in-javascript-2b22710e3958
+            */
+
+            //objects           
+            //         var myObject = {
+            //             name: "defaultName",
+            //             someNumber: 42,
+            //             anArray: [1, 2, 3, 4, 5],
+            //             //object method
+            //             getObjectDataString: function () {
+            //                 let arrayVals = "";
+
+            //                 this.anArray.forEach(function (item, index) {
+            //                     arrayVals += item + " ";
+            //                 });
+            //                 return this.name + " " + this.someNumber + " " + arrayVals.trim();
+
+            //             },
+            //             //getters and setters
+            //             get numberPlusOne() {
+            //                 return this.someNumber + 1;
+            //             },
+
+            //             set numberPlusAnother(num) {
+            //                 this.someNumber += num;
+            //             },
+            //         };
+
+            //         //can also define a method after the object is defined.
+            //         myObject.newMethod = function () {
+            //             console.log("This method only prints this method to the console");
+            //         };
+
+            //         myObject.newMethod();
+
+            //         console.log(myObject.getObjectDataString());
+            //         console.log(myObject.numberPlusOne);
+            //         console.log(myObject.numberPlusAnother = 9000);
+            //         console.log(myObject.someNumber);
+
+            
+
+            //         //associative array  aka map
+            //         var departments = {
+            //             CPSC: "Computer Science",
+            //             CPEN: "Computer Engineering",
+            //             CENG: "Civil Engineering",
+            //         }
+
+            //         //variableName[key] --> value
+            //         //works well with the for-in loop
+            //         for (const dept in departments) {
+            //             console.log(departments[dept]);
+            //         }
+
+            //         //using the object keys method
+            //         let departmentToRemove = Object.keys(departments)[(Object.keys(departments).length - 1)];
+
+            //         //delete elements
+            //         if (departmentToRemove in departments) {
+            //             delete departments[departmentToRemove];
+            //         }
+
+            //         let myString = departments["CPSC"];
+
+            //         myString = myString.replace(" ", "-");
+            //         console.log(myString)
+
+            //         //just a function to format numbers in a currency format: https://blog.abelotech.com/posts/number-currency-formatting-javascript/
+            //         function currencyFormat(num) {
+            //             return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+            //         }
+
+            //         //template literals            
+            //         let wage = 13.50, hours = 40, weeks = 4;
+
+            //         let stringTemplateOutput =
+            //             `The wage is ${currencyFormat(wage)} with ${hours} hours worked over ${weeks} weeks.
+            // Total pay is ${currencyFormat(wage * hours * weeks)}.`; //notice how newlines and tabs/spaces are in the output
+            //         console.log(stringTemplateOutput);
+
+
+            //date and sneak peek into intervals
+            var count = 0;
+            // var timerId = setInterval(
+            //     function () {
+            //         console.log(new Date());
+            //         count++
+            //         if (count > 5) {
+            //             clearInterval(timerId);
+            //         }
+            //     }
+            //     , 1000);
+
+            // console.log("Interval finished!"); //note this prints before interval is finished!
+
+            // console.log(new Date(0));
+            // console.log(new Date(2020, 9, 7)); //note the month starts at 0!
+
+            // //exception handling
+            // //uncaught exception
+            // // console.Log("Testing exception handling");
+
+            // //a handled exception
+            // try {
+            //     console.log("This is in the try block before the error");
+            //     console.Log("Testing exception handling");
+            //     console.log("This is in the try block after the error");
+            // } catch (exception) {
+            //     console.log("Caught an error: " + exception);
+            // }
+            // finally {
+            //     console.log("This is in the finally block after the try-catch");
+            // }
+
+            // console.log("This message is after our errors");
+
+            // //user defined exception
+            // let x = 9001;
+            // try {
+            //     if (x > 9000) {
+            //         throw "It's over 9000!";
+            //     }
+            // } catch (error) {
+            //     console.log("User defined exception: " + error);
+            // }
+            // //Error Object  
+            // //see others: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error         
+            // try {
+            //     if (x > 9000) {
+            //         throw new RangeError(`The value, ${x}, is over 9000!`); //another example of string template
+            //     }
+            // } catch (error) {
+            //     console.log(error);
+            // }
+
+        }; //end of window.onload function
+
+
+
+        /*
+                Participation:
+                1. Create a div with a text box
+                2. Create a JS object with a property for a date
+                3. Create a button below the text box.
+                4. Create an event handler on the button click
+                5. Create a function in that event handler to insert the current date into the text box
+        */
+
+        function showDate() {
+            var dateObj = {
+                day     : 11,
+                month   : "October",
+                year    : 2021,
+                dateString: function() {
+                    return this.month+" "+this.day+", "+this.year;
+                }
+            };
+            document.getElementById('date').value = dateObj.dateString();
+        };
+    </script>
+
+    
+
+</head>
+
+<body>
+    <h1>JavaScript, YAY!</h1>
+    <div id="output">
+        <textarea name="date" id="date" cols="30" rows="1" readonly></textarea>
+    </div>
+    <input type="button" id="get-date" value="date" onclick=showDate()>
+</body>
+
+</html>

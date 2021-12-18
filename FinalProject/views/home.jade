@@ -1,0 +1,35 @@
+extends layout
+block title
+  title Home Page | Note Store
+block stylesheet 
+  link(rel='stylesheet', type='text/css', href='css/style.css')
+block scripts
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+  script(src="scripts/main_script.js")
+block page-title-element 
+  h1 #{username}'s Note Store
+block content
+  div#sidebar-container
+    div#content-controls
+      h1.sidebar-description Controls
+      h2.sidebar-content-description Organize notes
+      div#content-organization-buttons
+        button(id='create-section') Create Section
+        button(id='create-nested-section') Create Nested Section
+      div#content-control-buttons
+        h2.sidebar-content-description Create notes
+        div#create-container
+          select(name="section-selector" id="section-selector")
+          button(id="create-button") Create text file
+          button(id='save-text' class='hide') Save File
+        div#upload-container
+    h1.sidebar-description Documents
+    ul#sections
+    div#account-information 
+      h1.sidebar-description 
+      form(id="mail")
+        input(type="text" id="main-address" name="mail-address" value="example@email.com")
+        input(type="submit" id="mail-button" value="Email Current Note")
+  div#output-container
+    iframe(src="public_docs/welcome.pdf" frameborder="0")#document-window
+    textarea(name="" id="edit-window" class="hide") 

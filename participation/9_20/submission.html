@@ -1,0 +1,103 @@
+<!-- This is an example of a fake submission results
+    page for CPSC 314
+     -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Submission Page</title>
+    <link rel="icon" href="favicon.png">
+    <style>
+        table,
+        th {
+            border: 1px solid black;
+
+        }
+
+        td {
+            border: 1px dotted black;
+        }
+    </style>
+    <script>
+        /*
+            This script segment is intended to simulate a form
+            getting data from a form post on the referring page.
+            We are only doing this for now until we go over a 
+            web server implementation that contains a server side
+            presence.
+        */
+        window.onload = function () {
+            //(GET method) get your query string values by field
+            var firstName = GetURLParameterValue("first");
+            var lastName = GetURLParameterValue("last");
+            var enteredPass = GetURLParameterValue("icee-master-pass")
+            var flavors = []
+            var selectedSize = GetURLParameterValue("")
+
+            //populate desired HTML elements with desired values
+            //we pass in the id name of the HTML element we want
+            //to populate with the query string text
+            // (e.g., id="fname" is found on the HTML element we
+            // want to populate with text)
+            document.getElementById("fname").textContent = firstName;
+            document.getElementById("lname").textContent = lastName;
+            if (enteredPass == "slurpeeissuperior") {
+                document.getElementById("icee-pass").textContent = "Free Icee!";
+            } else {
+                document.getElementById("icee-pass").textContent = "Wrong Password";
+            }
+                
+            var boxes = document.getElementsByClassName("flavor");
+            console.log(boxes);
+            for (i = 0; i < box.length; i++) {
+                if (boxs.getElement)
+            }
+
+            document.getElementById("flavors").textContent = flavors.toString;
+            document.getElementById("size").textContent = GetURLParameterValue("size")
+            document.getElementById("fill").textContent = GetURLParameterValue("size-slider")
+
+
+        };
+
+        //Function retrieves the requested GET parameter value from
+        //the query string. Input is the field name for the 
+        //field-value pair in the query string,
+        //e.g., field=value -> first=bob
+        function GetURLParameterValue(searchParameter) {
+            var queryString = window.location.search.substring(1);
+            var URLFieldValues = queryString.split('&');
+            for (var i = 0; i < URLFieldValues.length; i++) {
+                var parameterValues = URLFieldValues[i].split('=');
+                if (parameterValues[0] == searchParameter) {
+                    return parameterValues[1];
+                }
+            }
+        };
+    </script>
+
+</head>
+<body>
+    <h1>Submission Results Page</h1>     
+    <table>
+        <caption>First and Last Name Submitted on the Previous Page</caption>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Password</th>
+            <th>Flavors</th>
+            <th>Size</th>
+            <th>Fill</th>
+        </tr>
+        <tr>
+            <td id="fname"></td>
+            <td id="lname"></td>
+            <td id="icee-pass"></td>
+            <td id="flavors"></td>
+            <td id="size"></td>
+            <td id="fill"></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!--
+    Name:           Zac Foteff
+    Assignment:     HW5
+    Last Modified:  10/31/2021
+    Source:         https://github.com/end3r/Gamedev-Canvas-workshop
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>zfoteff HW5 | Breakout</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="480" height="320"></canvas>
+    <div id="options-container">
+        <label>Options</label>
+        <fieldset id="options">
+            <div id="options-buttons-container">
+                <button id="pause-button">Pause</button>
+                <button id="continue-button">Continue</button>
+                <button id="reset-button">Reset</button>
+            </div>
+            <div id="ball-speed-container">
+                <p id="speed-text">Speed: 1</p>
+                <input type="range" id="ball-speed" min=0.05 max=4 value=1 step=0.05>
+            </div>
+            <button id="reload">Reload</button>
+        </fieldset>
+    </div>
+</body>
+
+</html>

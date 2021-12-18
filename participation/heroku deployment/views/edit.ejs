@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Survey Response</title>
+    <style>
+        table,
+        th {
+            border: 1px solid black;
+
+        }
+
+        td {
+            border: 1px dotted black;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Edit</h2>
+    <% surveyRespondents.forEach(function(response) { %>
+    <form action="/edit/<%= response.first %>" method="POST">
+        <table>
+            <tr>
+                <td class="fname">
+                    <input type="text" value="<%= response.first %>" name="first">
+                    <input type="hidden" value="<%= response._id %>" name="id">
+                </td>
+            </tr>
+            <tr>
+                <td class="lname">
+                    <input type="text" value="<%= response.last %>" name="last">
+                </td>
+            </tr>
+            <tr>
+                <td class="check1">
+                    <input type="text" value="<%= response.check1 %>" name="check1">
+                </td>
+            </tr>
+            <tr>
+                <td class="rating">
+                    <input type="text" value="<%= response.rating %>" name="rating">
+                </td>
+            </tr>
+            <tr>
+                <td class="agree">
+                    <input type="text" value="<%= response.agree %>" name="agree">
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+        <p>
+            <button><a href="/show">List All</a></button>
+            <button type="submit">Edit</button>
+        </p>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>User Registration</title>
+
+    <style>
+        #username-error {
+            color: red;
+        }
+
+        table,
+        th {
+            border: 1px solid black;
+            margin: auto;
+        }
+
+        td {
+            border: 1px dotted black;
+        }
+
+        .navigation,
+        h1 {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .container {
+            margin: auto;
+            width: 75%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Create a User Account</h1>
+    <form action="/register" method="POST">
+        <fieldset>
+            <legend>Feedback Form</legend>
+            <p>
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" value="bsmith">
+                <span id="username-error">
+                    <% if(usernameError.length > 0) { %>
+                    Error: <%= usernameError %>
+                    <% } %>
+                </span>
+            </p>
+
+            <p>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" value="abc123">
+            </p>
+            <p>
+                <label for="passwordConf">Password</label>
+                <input type="password" name="passwordConf" id="passwordConf" value="abc123">
+            </p>
+
+            <input type="submit" value="Register">
+        </fieldset>
+    </form>     
+    <div class="navigation">
+        <button><a href="/static/index.html">Presentation</a></button>
+        <button><a href="/">Login</a></button>
+        <button><a href="/show">Show All Results</a></button>
+        <button><a href="/survey">Form Submission</a></button>
+        <button><a href="/logout">Log Out</a></button>
+    </div>
+</body>
+
+</html>

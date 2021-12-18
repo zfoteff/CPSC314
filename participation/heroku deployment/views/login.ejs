@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>User Log In</title>
+
+    <style>
+        #username-error {
+            color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <form action="/login" method="POST">
+        <fieldset>
+            <legend>Log In Form</legend>
+            <p>
+                <label for="username">Username</label>
+                <!-- <input type="text" name="username" id="username" value="bsmith"> -->
+                <input type="text" name="username" id="username" placeholder="Enter a username">
+                <span id="username-error">
+                    <% if(usernameError.length > 0) { %>
+                    Error: <%= usernameError %>
+                    <% } %>
+                </span>
+            </p>
+
+            <p>
+                <label for="password">Password</label>
+                <!-- <input type="password" name="password" id="password" value="abc123"> -->
+                <input type="password" name="password" id="password" placeholder="Enter a password">
+            </p>
+
+            <p>Don't have an account? <a href="/register">Register</a></p>
+
+            <input type="submit" value="Log In">
+        </fieldset>
+    </form>     
+    <div class="navigation">
+        <button><a href="/static/index.html">Presentation</a></button>
+        <button><a href="/show">Show All Results</a></button>
+        <button><a href="/survey">Form Submission</a></button>
+        <button><a href="/register">Register</a></button>
+        <button><a href="/logout">Log Out</a></button>
+    </div>
+</body>
+
+</html>

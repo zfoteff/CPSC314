@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background: grey;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+    <script src="script.js"></script>
+    <script>
+
+        var colors = ["red", "green", "blue", "yellow", "orange", "purple", "grey", "black", "white"];
+
+        window.onload = function () {
+
+            //get canvas (drawing area)
+            var canvas = document.getElementById("myCanvas");
+            //get context (drawing surface)
+            var context = canvas.getContext("2d");
+
+            var cutCircle = function (context, x, y, radius) {
+                context.globalCompositeOperation = 'destination-out'
+                context.arc(x, y, radius, 0, Math.PI * 2, true);
+                //alternate cut area
+                // context.arc(x, y, radius + 5, 0, Math.PI * 2, true); //where 5 is the shadow radius
+                context.fill();
+            }
+
+            //Classes
+            //Classes are "constructor functions"            
+            //Ball class:
+            //#region no prototype method
+            // function Ball(radius, color) {
+            //     this.radius = radius; //public properties
+            //     this.color = color;
+
+            //     //memory allocated for EACH instance of Ball!
+            //     this.draw = function () {
+            //         console.log("draw method");
+            //     };
+            // };
+            //#endregion
+
+            //#region prototype method class
+            function Ball(radius = 30, color = "red", position = [150, 150]) {
+                this.radius = radius;
+                this.color = color;
+                this.position = position;
+
+                let name; //private property
+
+                // public methods have access to private properties
+                this.setName = function (newName) {
+                    name = newName;
+                };
+
+                this.getName = function () {
+                    return name;
+                };
+
+                //ONE instance of this method allocated in memory, each new instance references this
+                Ball.prototype.draw = function (forceGradient = false) {
+                    console.log("draw method");
+                    // Shadow for the balls
+                    context.shadowBlur = 5;
+                    context.shadowOffsetX = 50;
+                    context.shadowOffsetY = 50;
+                    context.shadowColor = "black";
+
+                    //we want to keep our stroke outlines separate
+                    context.beginPath();
+                    //draw circle with our Ball object
+                    context.arc(this.position[0], this.position[1],
+                        this.radius, 0, Math.PI * 2);
+                    //set the circle color
+
+                    if (Math.random() > 0.3 && forceGradient) {
+                        // Create gradient
+                        var gradient = context.createLinearGradient(0, 0, this.radius, 0);
+                        gradient.addColorStop(0, colors[Math.floor(Math.random() * colors.length)]);
+                        gradient.addColorStop(1, colors[Math.floor(Math.random() * colors.length)]);
+
+                        // Fill with gradient
+                        context.fillStyle = gradient;
+                    } else {
+                        context.fillStyle = this.color;
+                    }
+                    //draw the circle                   
+                    context.fill();
+
+                    //changing shadow for stroke
+                    context.shadowBlur = 0;
+                    context.shadowOffsetX = 0;
+                    context.shadowOffsetY = 0;
+
+                    context.strokeStyle = colors[Math.floor(Math.random() * colors.length)];
+                    context.lineWidth = 5;
+                    context.stroke();
+                    //close stroke path
+                    context.closePath();
+                };
+
+
+                Ball.prototype.clear = function () {
+                    cutCircle(context, this.position[0], this.position[1], this.radius + 10);
+                };
+
+                Ball.prototype.move = function (newX, newY) {
+                    context.save();
+                    context.beginPath();
+                    // context.clearRect(0, 0, canvas.width, canvas.height);
+                    this.clear();
+                    this.position[0] = newX;
+                    this.position[1] = newY;
+                    context.restore();
+                    this.draw();
+                };
+            };
+            //#endregion
+
+            //can add new properties/methods later using prototypes
+            // Ball.speed = 100; //doesn't work            
+            // Ball.prototype.speed = 100; //works
+
+            //doesn't work!
+            // Ball.sayHello = function () {
+            //     console.log("Hello!");
+            // };
+
+            //works!
+            // Ball.prototype.sayHello = function () {
+            //     console.log("Hello!");
+            // };
+
+
+            var ball1 = new Ball(50, "orange", [55, 55]);
+            ball1.name = "Green Ball";
+            console.log(ball1.name);
+            console.log(ball1.getName());
+            ball1.setName("Orange Ball");
+            console.log(ball1.getName());
+            // console.log(ball1.speed); //testing new property
+            // ball1.sayHello();//testing new method
+
+
+            ball1.draw();
+            // ball1.draw(true);
+
+            var ball2 = new Ball(25, "red", [85, 55]);
+            // ball2.setName("Red Ball 2");
+            // ball2.draw();
+            // ball2.move(200, 155);
+
+            // ball1.draw(); //would need to redraw the ball if we don't want it cut from overlap
+
+            // var ball3 = new Ball();
+            // ball3.draw();
+
+            //#region mouseclick
+
+            canvas.addEventListener("click", createAtMouseClick);
+
+            //"event" is the local variable to access the properties of the event type that we captures
+            //in this case, it's a mouse click
+            function createAtMouseClick(event) {
+                console.log("offsetLeft: " + canvas.offsetLeft + " offsetTop: " + canvas.offsetTop);
+                var xVal = event.pageX - canvas.offsetLeft,
+                    yVal = event.pageY - canvas.offsetTop;
+                console.log(xVal, yVal);
+
+                let chosenColor = colors[Math.floor(Math.random() * colors.length)];
+                //Math.random() gives you 0.0-1.0, multiple to get a range value, 
+                //floor to truncate decimal, +1 so 1 is smallest radius
+                let newBall = new Ball(Math.floor(Math.random() * 50) + 10,
+                    chosenColor, [xVal, yVal]);
+                newBall.draw();
+
+                //alternate2
+                // ball1.draw();
+                // ball2.move(xVal, yVal);
+            };
+            //#endregion
+
+            //#region mousemove and mouseover
+            //mousemove event
+
+            var animFrameId; //used like clearInterval except for animation: cancelAnimationFrame(animFrameId)
+            var lastPosition = [0, 0];
+
+            canvas.addEventListener("mousemove", function (e) {
+                lastPosition = [e.clientX, e.clientY];
+                console.log("Event: " + e.clientX);
+                //on mouse move, request the animation frame is updated (redraw/paint the canvas)
+                animFrameId = window.requestAnimationFrame(createAtMouseMove);
+            });
+
+            function createAtMouseMove() {
+                var xVal = lastPosition[0] - canvas.offsetLeft,
+                    yVal = lastPosition[1] - canvas.offsetTop;
+                console.log(xVal, yVal);
+
+                //create a new ball
+                // let chosenColor = colors[Math.floor(Math.random() * colors.length)];
+                // let newBall = new Ball(Math.floor(Math.random() * 50) + 1,
+                //     chosenColor, [xVal, yVal]);
+                // newBall.draw();
+
+                //alternate1
+                // ball2.move(xVal, yVal);
+
+                //alternate2
+                // ball1.draw();
+                // ball2.move(xVal, yVal);
+            };
+
+            //#endregion
+
+        };//end of onload
+    </script>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="300" height="300"></canvas>
+</body>
+
+</html>

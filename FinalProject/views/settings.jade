@@ -1,0 +1,12 @@
+extends layout
+block title
+    title Settings | Note Store
+block stylesheet 
+    link(rel='stylesheet', type='text/css',href='css/style.css')
+block scripts
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    script(src="scripts/settings_script.js") 
+block content
+    div#config-container
+        button#change-username Change Username 
+        button#change-password Change Password

@@ -1,0 +1,107 @@
+<!--flexbox is a CSS layout mode that provides an efficient way to lay out 
+    elements in a container so the elements behave predictably when the 
+    container is resized or viewed on different screen sizes. Many 
+    developers find the flexbox layout easier to use than floating elements 
+    when creating fluid layouts.
+Great summary of properties: https://www.w3schools.com/css/css3_flexbox.asp
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --custom-line-height: 30;
+        }
+
+        /*
+        <header> and <footer> span entire width of <body>.
+        <div> with id container uses "display: flex" to create a flex container.
+        "flex-direction: row" places the container's flex items on the same row.
+        <nav>, <main>, and <aside> all have flex-grow = 0, so all three flex items
+            grow at the same rate when the browser is made wider.
+        <nav>, <main>, and <aside> all have flex-shrink = 1, so all three flex items
+            shrink at the same rate when the browser is resized.
+        <nav> occupies 20% of the row, <main> occupies 60%, and <aside> 
+            occupies 20%. 20% + 60% + 20% = 100% of the row.
+        */
+
+
+        /* styles.css using flexbox layout */
+        body {
+            width: 95%;
+            height: 100%;
+            margin: auto;
+            /* margin: 10px auto; */
+            /* padding: 0%; */
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #container-header {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #container-content {
+            display: flex;
+            flex-direction: row;
+        }
+
+        div {
+            flex: auto;
+        }
+
+        header {
+            background: black;
+            color: white;
+            text-align: center;
+            flex-grow: 0;
+            flex-shrink: 1;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            line-height: 3;
+            /* height: 30px; */
+        }
+
+        /*flex: 0 1 20%;*/
+        nav {
+            color: whitesmoke;
+            flex-grow: 0;
+            flex-shrink: 1;
+            flex-basis: 20%;
+            background: crimson;
+            text-align: center;
+            line-height: var(--custom-line-height);
+        }
+
+        main {
+            flex: 0 1 80%;
+            color: black;
+            background: whitesmoke;
+            line-height: 30;
+            text-align: center;
+            line-height: var(--custom-line-height);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Flexbox layout -->
+    <div id="container">
+        <div id="container-header">
+            <header>Header</header>
+        </div>
+        <div id="container-content">
+            <nav>Nav</nav>
+            <main>Main</main>
+        </div>
+    </div>
+</body>
+</html>

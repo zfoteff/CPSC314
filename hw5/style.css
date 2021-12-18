@@ -1,0 +1,89 @@
+* {
+    padding: 0;
+    margin: 0;
+    background-color: grey;
+    color: tan;
+    text-align: center;
+    font-size: 24px;
+}
+
+#myCanvas {
+    margin-top: 20%;
+    background-color: tan;
+}
+
+label {
+    color: #eeefff;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+#options {
+    margin-left: 30%;
+    margin-right: 30%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: black;
+    background-color: #eeefff;
+    padding: 5px;
+}
+
+#options-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+#options-buttons-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #eeefff;
+    justify-content: center;
+}
+
+#options-container button {
+    padding: 2%;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 2px 2px 10px 2px;
+    color: black;
+    background-color: goldenrod;
+}
+
+#reload {
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 80%;
+}
+
+#ball-speed-container {
+    margin-left: 10%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background: #eeefff;
+    color: #000000;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+#ball-speed-container p {
+    background: #eeefff;
+    color: #000000;
+    justify-self: center;
+    font-size: 18px;
+    width: 50%;
+}
+
+#ball-speed-container range {
+    justify-self: center;
+    width: 50%
+}
+
+canvas {
+    background: #eeefff;
+    display: block;
+    margin: 0 auto;
+}

@@ -1,0 +1,103 @@
+<!-- 
+    The CSS position property gives developers more control 
+    over where elements should appear in the browser. position
+    has four possible values:
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div,
+        body {
+            text-align: center;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        div {
+            height: 150px;
+            width: 150px;
+
+            /* height: 600px; */
+
+            /* position: relative; */
+            /* position: absolute; */
+        }
+
+        #middle {
+            border: solid 2px red;
+            color: blue;
+            background-color: azure;
+            /* default positioning */
+            /* position: static;  */
+
+            /* relative - Relative positioning positions the element relative 
+                to the element's default position */
+            /* position: relative; */
+            /* left: -50px; */
+            /* top: -50px; */
+
+            /*  fixed - Fixed positioning positions the element relative to the
+                viewport in a fixed location */
+            /* will not move when view changes! */
+            /* position: fixed; */
+            /* left: 0px; */
+            /* top: 0px; */
+
+            /* absolute - Absolute positioning positions the element relative
+                to the nearest positioned ancestor that uses fixed, absolute,
+                or relative positioning*/
+            /* position: absolute; */
+            /* width: 50px; */
+            /* height: 50px; */
+            /* left: -50px; */
+            /* top: -50px; */
+
+            /* z-index
+                 Elements with higher z-index values are placed on top of elements with lower z-index values. */
+            /* position: fixed; */
+            /* left: 55px; */
+            /* top: 55px; */
+            /* z-index: 6; */
+
+        }
+
+        #top {
+            background-color: lightgrey;
+            /* position: fixed; */
+            /* left: 10px; */
+            /* top: 10px; */
+            /* z-index: 10; */
+            /* z-index: 3; */
+        }
+
+        #bottom {
+            background-color: lightgoldenrodyellow;
+            /* position: fixed; */
+            /* left: 100px; */
+            /* top: 100px; */
+            /* z-index: 3; */
+            /* z-index: 10; */
+        }
+
+        #container {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top">Top (bottom?)</div>
+    <div id="middle">Middle</div>
+    <!-- <div id="container">
+        <div id="middle">Middle</div>
+    </div> -->
+    <div id="bottom">Bottom (top?)</div>
+
+</body>
+
+</html>

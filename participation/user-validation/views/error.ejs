@@ -1,0 +1,27 @@
+<% if(errors == 1) { %>
+<h1>No results found</h1>
+
+<% } else if(errors = 2) { %>
+
+<h1>Generic Error</h1>
+
+<% } else { %>
+<h1>Data Failed Validation</h1>
+<ul>
+    <li>
+        <%= errors.first %>
+    </li>
+    <li>
+        <%= errors.last %>
+    </li>
+    <li>
+        <%= errors.check1 %>
+    </li>
+    <li>
+        <%= errors.rating %>
+    </li>
+    <li>
+        <%= errors.agree %>
+    </li>
+</ul>
+<% } %>

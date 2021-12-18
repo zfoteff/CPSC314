@@ -1,0 +1,146 @@
+<!-- https://barney.gonzaga.edu/~olivares/10-27/javascript-workspace-index-10-27.html -->
+<!-- https://barney.gonzaga.edu/~olivares/10-27/javascript-workspace-index-10-27-post.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        //use ' to surround JSON (JavaScript Object Notation) strings
+        var randomJSONObject = '{"name": "Bob Smith", "qty": 1, "colors": ["red", "green", "blue"]}';
+        var resultJSON = JSON.parse(randomJSONObject);
+
+        console.log(resultJSON.colors);
+        console.log(resultJSON.colors[1]);
+        console.log(resultJSON.name);
+
+        var anotherJSONString = JSON.stringify(resultJSON);
+
+        window.onload = function () {
+            //add submit button click event listener
+            document.getElementById("submit-btn").addEventListener("click", submitForm);
+            document.getElementById("submit-btn-error").addEventListener("click", submitForm); //simulate 404 error
+        };//end onload        
+
+        function submitForm(event) {
+            //we need preventDefault so our submit button doesn't automatically submit
+            event.preventDefault();
+
+            let targetId = event.target.id; //used to detect which button was clicked to simulate error
+
+            //0. get form values and build querystring
+            var name = document.getElementById("name").value;
+            var qty = document.getElementById("qty").value;
+            var querystring = "name=" + name + "&qty=" + qty;
+
+            //1. Create a new XMLHttpRequest object.
+            var xhr = new XMLHttpRequest();
+            //2. Assign handlers to the desired events via the addEventListener() method.
+            //The load handler is called when the exchange between the browser and server has completed.
+            //request might NOT have been successful
+
+            //xhr.addEventListener("loadend", function () { //loadend called successful or not
+            xhr.addEventListener("load", function () {
+                console.log(xhr.response);
+                // document.getElementById("response").textContent = xhr.response;
+                if (xhr.status == 200) {
+                    handleXHR(xhr);
+                }
+                else {
+                    console.log(xhr.statusText);
+                    document.getElementsByTagName("body")[0].innerHTML = xhr.response;
+                }
+            });
+
+            //also see abort and timeout
+            xhr.addEventListener("error", function () {
+                console.log("Error!");
+            });
+
+            // 3. Initialize a connection to a remote resource using the open() method.
+            // xhr.open("GET", "form-response.php?" + querystring);            
+
+            //     //POST
+            xhr.open("POST", "form-response.php");
+
+
+            //simulate error
+            if (targetId == "submit-btn-error") {
+                // xhr.open("GET", "form-response-doesnt-exist.php?" + querystring);
+                xhr.open("POST", "form-response-doesnt-exist.php");
+
+            }
+
+            //     //note: can only send from originating site!
+            //4. Modify the default HTTP request if needed by using the setRequestHeader() method.
+            //     //xhr.setRequestHeader("Origin", "barney.gonzaga.edu"); //does not make CORS work
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") //for POST
+
+            //5. Send the GET HTTP request via the send() method.
+            //https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp            
+            // xhr.send();
+            //POST - For POST requests, the data to be sent with the request is passed as the argument to the send() method.
+            xhr.send(querystring);
+        };
+
+        function handleXHR(xhr) {
+            console.log(xhr.status);
+            console.log(xhr.statusText);
+            var resultJSON = JSON.parse(xhr.response);
+
+            var lengthString = resultJSON.length;
+            if (lengthString == undefined) {
+                console.log(resultJSON.name);
+                console.log(resultJSON.qty);
+                for (const color of resultJSON.colors) {
+                    console.log(color);
+                }
+            }
+            //https://www.w3schools.com/jsref/met_node_insertadjacenthtml.asp
+            document.getElementById("response").insertAdjacentHTML('beforeend', "JavaScript Object: <br>" + resultJSON + "<br>");
+            document.getElementById("response").insertAdjacentHTML('beforeend', "Raw JSON: <br>" + xhr.response);
+        };
+    </script>
+</head>
+
+<body>
+    <h1>8. Advanced JavaScript</h1>
+    <ol>
+        <li>JSON</li>
+        <li>XMLHttpRequest (Ajax)</li>
+    </ol>
+
+    <div>
+        <form>
+            <p>
+                <label for="name">Name:</label>
+                <input id="name" type="text" name="name">
+            </p>
+            <p>
+                <label for="qty">Quantity</label>
+                <select id="qty" name="qty">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </p>
+            <p>
+                <input id="submit-btn" type="submit" value="Submit Request">
+            </p>
+            <p>
+                <input id="submit-btn-error" type="submit" value="Submit Invalid Request">
+            </p>
+        </form>
+    </div>
+
+    <div>
+        <h1 id="response"></h1>
+    </div>
+</body>
+
+</html>

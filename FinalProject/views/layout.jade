@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    block title
+      title Note Store
+    block stylesheet
+      link(rel='stylesheet', type='text/css',href='css/style.css')
+    block scripts 
+      script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    link(rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon")
+  body
+    div#page-container
+      div#header-container
+        block page-title-element
+          h1 Note Store
+        div#navbar-container
+          a(href="/home") Home
+          a(href="/about") About
+          a(href="/settings") Settings
+          a(href="/login") Logout
+      div#content-container
+        block content
