@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Zac Foteff">
+    <meta name="date" content="9-20-2021">
+    <meta name="description" content="Submission for Gonzaga CPSC314 HW#1 due 9-20-2021">
+    <title>Zac Foteff HW#1 | CPSC314: Web Development</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+        function popupEvent() {
+            alert("The FitnessGram™ Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal. [beep] A single lap should be completed each time you hear this sound. [ding] Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start. On your mark, get ready, start.");
+        } function colorEvent() {
+            document.body.style.background="#a52a2a";
+        } function colorBack() {
+            document.body.style.background="#2f4f4f";
+        }
+    </script>
+</head>
+<body>
+    <h1>Zac Foteff | HW#1</h1>
+    <h2>September 20, 2021</h2>
+    <p> 
+        &emsp;This class offers me the opportunity to expand on many skills I have practiced
+        informally. I have walked through the process of creating a website myself, however 
+        I was never able to quite figure out how to properly host the website with the hostname
+        I had purchased from a DNS service. To be able to go through all the low-level details of 
+        creating a functional website in an academic setting is an <strong><em>invaluable oppotunity</em></strong> I hope
+        to get the most out of. I have a good understanding of HTML and CSS, but I am lacking in 
+        understanding about JavaScript and how to <em>effectively</em> apply it into professional looking websites. 
+    </p>
+    <img src="assets/lxixj1myd0n71.png" alt="dank meme 1" title="Dank Meme 1"> <br>
+    <img src="assets/97p4ob5aebj51.png" alt="dank meme 2" title="Dank Meme 2"> <br>
+    <a href="https://www.reddit.com/r/ProgrammerHumor/comments/pmmwaf/ok_i_made_the_joke_now_how_do_i_exit_vim/">Link to meme 1 source</a>
+    <a href="https://www.reddit.com/r/ProgrammerHumor/comments/igvny1/python_goes_brrrr/">Link to meme 2 source</a>
+    <button type="button" onclick=popupEvent() id="popup">Click this button to do something</button>
+    <button type="button" onmousedown=colorEvent() onmouseup=colorBack() onpointerdown=colorEvent() onpointerup=colorBack() id="color">Click this button to do something else</button>
+</body>
+</html>

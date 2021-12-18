@@ -1,0 +1,56 @@
+a:active {
+    color: yellow;
+}
+
+p {
+    color: lightgoldenrodyellow;
+    font-size: 14pt;
+    display: block;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+a {
+   color: orange;
+   display: block; 
+   text-align: center;
+   font-size: 16pt;
+}
+
+body {
+    background-color:#2f4f4f;
+}
+
+h1 {
+    color: whitesmoke;
+    text-align: center;
+}
+
+h2 {
+    color: whitesmoke;
+    text-align: center;
+}
+
+img {
+    display: block;
+    width: 55%;
+    height: 55%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+    display: block;
+    margin-top: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16pt;
+}
+
+.popup {
+    color:palegoldenrod;
+}
+
+.color {
+    color: paleturquoise;
+}
